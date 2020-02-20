@@ -8,7 +8,7 @@ $(function() {
 function changePage() {
   switch (location.hash) {
     case '#index':
-      $('#root').load('modules/loan/loan.html');
+      $('#root').load('modules/main/main.html');
       break;
     case '#loan':
       $('#root').load('modules/loan/loan.html');
@@ -16,7 +16,13 @@ function changePage() {
     default:
       $('#root').load('modules/main/main.html');
   }
-  if (prev_a) prev_a.removeClass('active');
-  prev_a = $('a[href=' + location.hash + ']:parent').addClass('active');
-  console.log(prev_a);
+  if (prev_a) {
+    prev_a.removeClass('active');
+  } else {
+    $("a[href='#index']")
+      .parent()
+      .removeClass('active');
+  }
+  prev_a = $("a[href='" + location.hash + "']").parent();
+  prev_a.addClass('active');
 }
