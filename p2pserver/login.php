@@ -8,6 +8,8 @@
         $rs=mysqli_query($conn,$sql);
         $num=mysqli_num_rows($rs);
         if($num){
+            //将用户名保存到session中
+            $_SESSION['username']=$username;
             header("Location:http://localhost:3000/");
         }else{
             header("Location:http://localhost:3000/login.html?fail=fail");

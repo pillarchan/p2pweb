@@ -4,6 +4,7 @@ $(function() {
   //    $('#root').load('modules/loan/loan.html')
   window.onhashchange = changePage;
   changePage();
+  getSession();
 });
 function changePage() {
   switch (location.hash) {
@@ -25,4 +26,22 @@ function changePage() {
   }
   prev_a = $("a[href='" + location.hash + "']").parent();
   prev_a.addClass('active');
+}
+
+function getSession() {
+  $.ajax({
+    type: 'get',
+    url: 'http://myp2pweb/session.php',
+    xhrFields: {
+      withCredentials: true
+    },
+    crossDomain: true,
+    success: function(res) {
+      if (res != 'nologin') {
+        $('#islogin').html(res);
+      } else {
+        $('#islogin').html('请登录');
+      }
+    }
+  });
 }
