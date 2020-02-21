@@ -9,7 +9,10 @@ ul {
   list-style: none;
 }
 ul,
-ul li {
+ul li,
+p,
+.panel-body,
+.list-group {
   margin: 0;
   padding: 0;
 }
@@ -25,6 +28,11 @@ ul li {
     font-weight: bold;
     border-bottom: 4px solid #4391cf;
     color: #4391cf;
+  }
+}
+.list-group-item.active {
+  & > a {
+    color: @white;
   }
 }
 .white-color {
@@ -89,5 +97,15 @@ ul li {
     img {
       width: 200px;
     }
+  }
+}
+/*账户信息*/
+#accountinfo {
+  padding: 20px;
+  .info {
+    height: 115px;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
   }
 }

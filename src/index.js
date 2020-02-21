@@ -14,6 +14,15 @@ function changePage() {
     case '#loan':
       $('#root').load('modules/loan/loan.html');
       break;
+    case '#mycenter':
+      $('#root').load('modules/mycenter/mycenter.html');
+      break;
+    case '#accountinfo':
+      $('#mycenter_root').load('modules/mycenter/myaccount/accountinfo/accountinfo.html');
+      break;
+    case '#changeinfo':
+      $('#mycenter_root').load('modules/mycenter/myaccount/changeinfo/changeinfo.html');
+      break;
     default:
       $('#root').load('modules/main/main.html');
   }
@@ -38,6 +47,7 @@ function getSession() {
     crossDomain: true,
     success: function(res) {
       if (res != 'nologin') {
+        sessionStorage.isLogin = true;
         $('#islogin').html(res);
       } else {
         $('#islogin').html('请登录');
