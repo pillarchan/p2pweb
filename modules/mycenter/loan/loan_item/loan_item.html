@@ -1,0 +1,177 @@
+<div id="mycenter" class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+              <a
+                role="button"
+                data-toggle="collapse"
+                data-parent="#accordion"
+                href="#collapseOne"
+                aria-expanded="true"
+                aria-controls="collapseOne"
+              >
+                我的账户
+              </a>
+            </h4>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+              <ul class="list-group">
+                <li class="list-group-item">
+                  <a href="#accountinfo">账户信息</a>
+                </li>
+                <li class="list-group-item">
+                  <a href="#mycenter">实名认证</a>
+                </li>
+                <li class="list-group-item">
+                  <a href="#mycenter">登录记录</a>
+                </li>
+                <li class="list-group-item">
+                  <a href="#changeinfo">修改用户</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingTwo">
+            <h4 class="panel-title">
+              <a
+                class="collapsed"
+                role="button"
+                data-toggle="collapse"
+                data-parent="#accordion"
+                href="#collapseTwo"
+                aria-expanded="false"
+                aria-controls="collapseTwo"
+              >
+                借款项目
+              </a>
+            </h4>
+          </div>
+          <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+            <div class="panel-body">
+              <ul class="list-group">
+                <li class="list-group-item active">
+                  <a href="#loan_item">借款项目</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingThree">
+            <h4 class="panel-title">
+              <a
+                class="collapsed"
+                role="button"
+                data-toggle="collapse"
+                data-parent="#accordion"
+                href="#collapseThree"
+                aria-expanded="false"
+                aria-controls="collapseThree"
+              >
+                Collapsible Group Item #3
+              </a>
+            </h4>
+          </div>
+          <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+            <div class="panel-body">
+              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
+              moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+              Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda
+              shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
+              proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim
+              aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9" id="mycenter_root">
+      <div id="loan_item">
+        <h2>借款项目：<span id="loan_apply_type"></span></h2>
+        <p>可借金额：<span id="loan_allowed_limit"></span></p>
+        <form action="http://myp2pweb/borrow.php" method="get" class="form">
+          <div class="row">
+            <div class="col-md-4">
+              <label>借款金额</label>
+              <div class="input-group">
+                <input name="borrowmoney" type="number" class="form-control borrow-money" />
+                <span class="input-group-addon">元</span>
+              </div>
+              <label>借款利息</label>
+              <div class="input-group">
+                <input type="number" name="interest" class="form-control borrow-money" />
+                <span class="input-group-addon">%</span>
+              </div>
+              <label>借款期限</label>
+              <div class="input-group">
+                <select name="borrowtime" class="form-control borrow-money">
+                  <option value="1">1</option>
+                  <option value="3">3</option>
+                  <option value="6">6</option>
+                  <option value="9">9</option>
+                  <option value="12">12</option>
+                  <option value="18">18</option>
+                  <option value="24">24</option>
+                </select>
+                <span class="input-group-addon">月</span>
+              </div>
+              <label>还款方式</label>
+              <div class="input-group">
+                <label for="radio1"> <input type="radio" name="repaytype" id="radio1" value="0"/>按月分期</label>
+                <label for="radio2"> <input type="radio" name="repaytype" id="radio2" value="1"/>按月到期</label>
+              </div>
+              <label>最小投标</label>
+              <div class="input-group">
+                <input type="number" name="minbid" class="form-control" />
+                <span class="input-group-addon">元</span>
+              </div>
+              <label>投标奖金</label>
+              <div class="input-group">
+                <input type="number" name="bonus" class="form-control borrow-money" />
+                <span class="input-group-addon">%</span>
+              </div>
+              <label>投标天数</label>
+              <div class="input-group">
+                <select class="form-control" name="days">
+                  <option value="1">1</option>
+                  <option value="7">7</option>
+                  <option value="14">14</option>
+                  <option value="30">30</option>
+                </select>
+                <span class="input-group-addon">天</span>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="panel panel-default">
+                <div class="panel-heading">相关费用</div>
+                <div class="panel-body">
+                  <ul>
+                    <li>利息：<span id="interest"></span></li>
+                    <li>奖金：<span id="bonus"></li>
+                    <li>管理费：<span id="fee"></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8">
+              <label>借款标题</label>
+              <input type="text" class="form-control" name="title" />
+              <label>借款描述</label>
+              <textarea class="form-control" name="info" />
+              <button class="btn btn-primary">提交申请</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="modules/mycenter/loan/loan_item/loan_item.js"></script>

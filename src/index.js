@@ -23,6 +23,9 @@ function changePage() {
     case '#changeinfo':
       $('#mycenter_root').load('modules/mycenter/myaccount/changeinfo/changeinfo.html');
       break;
+    case '#loan_item':
+      $('#root').load('modules/mycenter/loan/loan_item/loan_item.html');
+      break;
     default:
       $('#root').load('modules/main/main.html');
   }

@@ -18,7 +18,7 @@ function changeinfo() {
       },
       crossDomain: true,
       success: function(res) {
-        console.log(res);
+        // console.log(res);
         if (res) {
           alert('用户修改成功！');
         } else {

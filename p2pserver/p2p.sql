@@ -6,7 +6,9 @@ create table user (
     username varchar(50) not null comment "用户名",
     pwd varchar(32) not null comment "密码",
     phone bigint comment "手机",
-    create_time timestamp default current_timestamp
+    create_time timestamp default current_timestamp COMMENT '注册时间' ,
+    email VARCHAR(50),
+    nickname VARCHAR(50),
 );
 insert into user (username,pwd,phone) values ('test','test','12345678987');
 select * from user;
@@ -25,3 +27,23 @@ CHANGE COLUMN `create_time` `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTA
 ADD UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE,
 ADD UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE;
 ;
+
+CREATE TABLE `p2p`.`borrow` (
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `borrowmoney` INT NOT NULL COMMENT '借款金额',
+  `interest` FLOAT NOT NULL COMMENT '利息',
+  `minbid` INT NOT NULL COMMENT '最小投标',
+  `days` INT NOT NULL COMMENT '招标天数',
+  `title` VARCHAR(100) NOT NULL COMMENT '借款标题',
+  `info` VARCHAR(200) NOT NULL COMMENT '借款描述',
+  `borrowtime` INT NOT NULL COMMENT '借款期限（单位：月）',
+  `repaytype` INT NOT NULL COMMENT '还款方式，0，按月，1，到期累计',
+  `userid` INT NOT NULL COMMENT '用户id，用于外联user表',
+  PRIMARY KEY (`id`),
+  CONSTRAINT `userid`
+    FOREIGN KEY (`userid`)
+    REFERENCES `p2p`.`user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+    ALTER TABLE `p2p`.`borrow` 
+ADD COLUMN `bonus` FLOAT NOT NULL AFTER `userid`;
