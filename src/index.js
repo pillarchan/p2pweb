@@ -1,7 +1,5 @@
 var prev_a;
 $(function() {
-  //    $('#root').load('modules/main/main.html')
-  //    $('#root').load('modules/loan/loan.html')
   window.onhashchange = changePage;
   changePage();
   getSession();
@@ -13,6 +11,9 @@ function changePage() {
       break;
     case '#loan':
       $('#root').load('modules/loan/loan.html');
+      break;
+    case '#borrowinfo':
+      $('#root').load('modules/borrowinfo/borrowinfo.html');
       break;
     case '#mycenter':
       $('#root').load('modules/mycenter/mycenter.html');

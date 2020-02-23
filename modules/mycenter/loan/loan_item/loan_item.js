@@ -31,10 +31,8 @@ function getEduInfo() {
     },
     crossDomain: true,
     success: function(res) {
-      var data = JSON.parse(res);
-      if (data.status == '0') {
-        alert('你尚未登录，请先登录');
-      } else {
+      if (res) {
+        var data = JSON.parse(res);
         switch (data.education) {
           case '博士':
             $('#loan_allowed_limit').html('￥200,000');
@@ -52,6 +50,8 @@ function getEduInfo() {
             $('#loan_allowed_limit').html('￥5,000');
             break;
         }
+      } else {
+        alert('你尚未登录，请先登录');
       }
     }
   });

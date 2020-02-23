@@ -9,6 +9,7 @@
         $data=mysqli_fetch_assoc($rs);
         echo json_encode($data);
     }else{
-        echo json_encode(array('status'=>'0'));
+        echo 0;
+        // echo json_encode(array('status'=>0));
     }
 ?>
