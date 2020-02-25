@@ -51,7 +51,7 @@ function getSession() {
     crossDomain: true,
     success: function(res) {
       if (res != 'nologin') {
-        sessionStorage.isLogin = true;
+        sessionStorage.setItem('isLogin', true);
         $('#islogin').html(res);
       } else {
         $('#islogin').html('请登录');

@@ -7,18 +7,9 @@ $(function() {
   getBorrowList(page);
 });
 function getBorrowList(page) {
-  $.ajax({
-    type: 'get',
-    url: 'http://myp2pweb/getBorrowList.php',
-    data: {
-      start_page: page,
-      page_count: pageCount
-    },
-    xhrFields: {
-      withCredentials: true
-    },
-    crossDomain: true,
-    success: function(res) {
+  apiGet(
+    '/getBorrowList.php',
+    function(res) {
       if (res) {
         var data = JSON.parse(res);
         totalPage = data.maxPage;
@@ -28,8 +19,35 @@ function getBorrowList(page) {
       } else {
         $('#borrow_list').html('暂无数据');
       }
+    },
+    {
+      start_page: page,
+      page_count: pageCount
     }
-  });
+  );
+  // $.ajax({
+  //   type: 'get',
+  //   url: 'http://myp2pweb/getBorrowList.php',
+  //   data: {
+  //     start_page: page,
+  //     page_count: pageCount
+  //   },
+  //   xhrFields: {
+  //     withCredentials: true
+  //   },
+  //   crossDomain: true,
+  //   success: function(res) {
+  //     if (res) {
+  //       var data = JSON.parse(res);
+  //       totalPage = data.maxPage;
+  //       // console.log(data.result);
+  //       initjquerypage();
+  //       renderBorrowList(data.result);
+  //     } else {
+  //       $('#borrow_list').html('暂无数据');
+  //     }
+  //   }
+  // });
 }
 function initjquerypage() {
   if (isInit) return;
@@ -60,7 +78,7 @@ function renderBorrowList(list) {
     <td>${v['interest']}.00%</td>
     <td>${v['borrowmoney']}.00</td>
     <td>${v['repaytype'] == 0 ? '按月还款' : '按月到期'}</td>
-    <td>${(v['investmoney'] / v['borrowmoney']).toFixed(2)}%</td>
+    <td>${((v['investmoney'] / v['borrowmoney']) * 100).toFixed(2)}%</td>
     <td><button onclick="clickInfo('${JSON.stringify(v).replace(
       /"/g,
       '&quot;'
@@ -75,6 +93,7 @@ function renderBorrowList(list) {
 }
 
 function clickInfo(obj) {
+  // obj = JSON.stringify(obj);
   sessionStorage.setItem('borrowinfo', obj);
   location.href = '#borrowinfo';
 }
