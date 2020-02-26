@@ -3,8 +3,14 @@ var totalPage;
 var pageCount = 4;
 var isInit = false;
 var isPageFirst = true;
+var echart;
 $(function() {
+  echart = echarts.init(document.getElementById('myecharts'));
+  echart.showLoading({
+    text: '正在拼命加载数据……'
+  });
   getBorrowList(page);
+  getEchartsInfo();
 });
 function getBorrowList(page) {
   apiGet(
@@ -101,3 +107,82 @@ function clickInfo(obj) {
       /"/g,
       '&quot;'
     )} */
+
+function initEcharts(arr) {
+  // 基于准备好的dom，初始化echarts实例
+
+  // 指定图表的配置项和数据
+  var option = {
+    // backgroundColor: '#2c343c',
+
+    title: {
+      text: '投资年利率',
+      left: 'center',
+      top: 20,
+      textStyle: {
+        color: '#111'
+      }
+    },
+
+    tooltip: {
+      trigger: 'item',
+      formatter: '年利率<br/>{b} : {c} ({d}%)'
+    },
+    series: [
+      {
+        name: '访问来源',
+        type: 'pie',
+        radius: '55%',
+        center: ['50%', '50%'],
+        data: arr.sort(function(a, b) {
+          return a.value - b.value;
+        }),
+        roseType: 'radius'
+        // label: {
+        //   color: 'rgba(255, 255, 255, 0.3)'
+        // },
+        // labelLine: {
+        //   lineStyle: {
+        //     color: 'rgba(255, 255, 255, 0.3)'
+        //   },
+        //   smooth: 0.2,
+        //   length: 10,
+        //   length2: 20
+        // },
+        // itemStyle: {
+        //   color: '#c23531',
+        //   shadowBlur: 200,
+        //   shadowColor: 'rgba(0, 0, 0, 0.5)'
+        // },
+
+        // animationType: 'scale',
+        // animationEasing: 'elasticOut',
+        // animationDelay: function(idx) {
+        //   return Math.random() * 200;
+        // }
+      }
+    ]
+  };
+  // 使用刚指定的配置项和数据显示图表。
+  echart.setOption(option);
+}
+
+function getEchartsInfo() {
+  apiGet('/getEchartsInfo.php', function(res) {
+    var data;
+    if (res) {
+      data = JSON.parse(res);
+      data.forEach(function(v, i) {
+        v['value'] = v['cnt'];
+        v['name'] = '年利率：' + v['interest'] + '%';
+        delete v['cnt'];
+        delete v['interest'];
+      });
+    } else {
+      // alert('利率图形表暂无数据');
+      data = [];
+    }
+    echart.hideLoading();
+    initEcharts(data);
+  });
+}
