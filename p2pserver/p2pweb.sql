@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
+﻿-- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
 --
 -- Host: localhost    Database: p2p
 -- ------------------------------------------------------
@@ -8,6 +8,9 @@
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
  SET NAMES utf8 ;
+DROP DATABASE IF EXISTS p2p;
+Create DATABASE p2p;
+USE p2p;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
